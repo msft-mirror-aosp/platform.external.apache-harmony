@@ -41,6 +41,8 @@ LOCAL_JARJAR_RULES := $(LOCAL_PATH)/jarjar-rules.txt
 # Pin java_version until jarjar is certified to support later versions. http://b/72703434
 LOCAL_JAVA_LANGUAGE_VERSION := 1.8
 LOCAL_ADDITIONAL_DEPENDENCIES := $(LOCAL_PATH)/Android.mk
+# b/73499927
+LOCAL_ERROR_PRONE_FLAGS := -Xep:MissingOverride:OFF
 include $(BUILD_STATIC_JAVA_LIBRARY)
 
 ifeq ($(HOST_OS),linux)
@@ -54,6 +56,8 @@ LOCAL_MODULE := apache-harmony-tests-hostdex
 # Pin java_version until jarjar is certified to support later versions. http://b/72703434
 LOCAL_JAVA_LANGUAGE_VERSION := 1.8
 LOCAL_JARJAR_RULES := $(LOCAL_PATH)/jarjar-rules.txt
+# b/73499927
+LOCAL_ERROR_PRONE_FLAGS := -Xep:MissingOverride:OFF
 include $(BUILD_HOST_DALVIK_JAVA_LIBRARY)
 endif  # HOST_OS == linux
 
