@@ -18,6 +18,7 @@ java_test {
     hostdex: true,
     host_supported: true,
     srcs: ["src/test/java/**/*.java"],
+    no_framework_libs: true,
     libs: ["junit"],
 
     // b/73499927
