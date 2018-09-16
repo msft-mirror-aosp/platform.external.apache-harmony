@@ -1,0 +1,39 @@
+java_test {
+    name: "CtsJdwp",
+    srcs: ["src/test/java/**/*.java"],
+    exclude_srcs: ["src/test/java/org/apache/harmony/jpda/tests/jdwp/DDM/**/*.java"],
+    libs: ["junit"],
+
+    errorprone: {
+        javacflags: [
+            "-Xep:ArrayToString:ERROR",
+            // b/73499927
+            "-Xep:MissingOverride:OFF",
+        ],
+    },
+}
+
+java_test {
+    name: "apache-harmony-jdwp-tests",
+    hostdex: true,
+    host_supported: true,
+    srcs: ["src/test/java/**/*.java"],
+    no_framework_libs: true,
+    libs: ["junit"],
+
+    // b/73499927
+    errorprone: {
+        javacflags: ["-Xep:MissingOverride:OFF"],
+    },
+
+    target: {
+        host: {
+            exclude_srcs: ["src/test/java/org/apache/harmony/jpda/tests/jdwp/DDM/**/*.java"],
+        },
+    },
+}
+
+java_library_host {
+    name: "apache-harmony-jdwp-tests-host",
+    static_libs: ["apache-harmony-jdwp-tests"],
+}
