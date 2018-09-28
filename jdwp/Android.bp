@@ -1,18 +1,8 @@
-java_genrule {
-    name: "SourceDebugExtensionMockClass_gen",
-    host_supported: true,
-    srcs: ["src/test/resources/org/apache/harmony/jpda/tests/jdwp/Events/SourceDebugExtensionMockClass.class"],
-    tools: ["soong_zip"],
-    cmd: "$(location soong_zip) -jar -o $(out) -C external/apache-harmony/jdwp/src/test/resources -f $(in)",
-    out: ["SourceDebugExtensionMockClass_gen.jar"],
-}
-
-java_defaults {
-    name: "apache-harmony-jdwp-defaults",
+java_test {
+    name: "CtsJdwp",
     srcs: ["src/test/java/**/*.java"],
     exclude_srcs: ["src/test/java/org/apache/harmony/jpda/tests/jdwp/DDM/**/*.java"],
     libs: ["junit"],
-    static_libs: ["SourceDebugExtensionMockClass_gen"],
 
     errorprone: {
         javacflags: [
@@ -21,25 +11,26 @@ java_defaults {
             "-Xep:MissingOverride:OFF",
         ],
     },
+}
+
+java_test {
+    name: "apache-harmony-jdwp-tests",
+    hostdex: true,
+    host_supported: true,
+    srcs: ["src/test/java/**/*.java"],
+    no_framework_libs: true,
+    libs: ["junit"],
+
+    // b/73499927
+    errorprone: {
+        javacflags: ["-Xep:MissingOverride:OFF"],
+    },
 
     target: {
         host: {
             exclude_srcs: ["src/test/java/org/apache/harmony/jpda/tests/jdwp/DDM/**/*.java"],
         },
     },
-}
-
-java_test {
-    name: "CtsJdwp",
-    defaults: ["apache-harmony-jdwp-defaults"],
-}
-
-java_test {
-    name: "apache-harmony-jdwp-tests",
-    defaults: ["apache-harmony-jdwp-defaults"],
-    hostdex: true,
-    host_supported: true,
-
 }
 
 java_library_host {

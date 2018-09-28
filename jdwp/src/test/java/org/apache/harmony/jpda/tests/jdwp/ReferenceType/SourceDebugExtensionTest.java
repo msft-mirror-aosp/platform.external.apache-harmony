@@ -29,7 +29,6 @@ import org.apache.harmony.jpda.tests.framework.jdwp.CommandPacket;
 import org.apache.harmony.jpda.tests.framework.jdwp.JDWPCommands;
 import org.apache.harmony.jpda.tests.framework.jdwp.JDWPConstants;
 import org.apache.harmony.jpda.tests.framework.jdwp.ReplyPacket;
-import org.apache.harmony.jpda.tests.jdwp.Events.SourceDebugExtensionMockClass;
 import org.apache.harmony.jpda.tests.jdwp.share.JDWPSyncTestCase;
 import org.apache.harmony.jpda.tests.share.JPDADebuggeeSynchronizer;
 
@@ -117,7 +116,7 @@ public class SourceDebugExtensionTest extends JDWPSyncTestCase {
      */
     public void testSourceDebugExtension001() {
         doTest("testSourceDebugExtension001",
-               getClassSignature(SourceDebugExtensionMockClass.class),
+               "Lorg/apache/harmony/jpda/tests/jdwp/Events/SourceDebugExtensionMockClass;",
                JDWPConstants.Error.NONE);
     }
 
