@@ -1,19 +1,4 @@
 java_test {
-    name: "CtsJdwp",
-    srcs: ["src/test/java/**/*.java"],
-    exclude_srcs: ["src/test/java/org/apache/harmony/jpda/tests/jdwp/DDM/**/*.java"],
-    libs: ["junit"],
-
-    errorprone: {
-        javacflags: [
-            "-Xep:ArrayToString:ERROR",
-            // b/73499927
-            "-Xep:MissingOverride:OFF",
-        ],
-    },
-}
-
-java_test {
     name: "apache-harmony-jdwp-tests",
     hostdex: true,
     host_supported: true,
