@@ -112,7 +112,7 @@ public class SuperClassTest extends JDWPClassTypeTestCase {
 
         // check that superclass for Debuggee is SyncDebuggee
         {
-            long classID = getClassIDBySignature(getDebuggeeSignature());
+            long classID = getClassIDBySignature(getDebuggeeClassSignature());
 
             ReplyPacket reply = jdwpGetSuperClassReply(classID, JDWPConstants.Error.NONE);
             // complare returned signature with superclass signature
@@ -163,7 +163,7 @@ public class SuperClassTest extends JDWPClassTypeTestCase {
 
         // check that reply error code is INVALID_OBJECT for a FieldID Out Data
         {
-            long classID = getClassIDBySignature(getDebuggeeSignature());
+            long classID = getClassIDBySignature(getDebuggeeClassSignature());
 
             Field[] fields = jdwpGetFields(classID);
             // assert stringID is not null
