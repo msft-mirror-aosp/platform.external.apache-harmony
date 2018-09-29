@@ -150,7 +150,7 @@ public class ClassPrepareTest extends JDWPEventTestCase {
             return;
         }
 
-        String expectedClassSignature = "Lorg/apache/harmony/jpda/tests/jdwp/Events/SourceDebugExtensionMockClass;";
+        String expectedClassSignature = getClassSignature(SourceDebugExtensionMockClass.class);
 
         logWriter.println("==> testClassPrepareEventForSourceNameMatch started");
         synchronizer.receiveMessage(JPDADebuggeeSynchronizer.SGNL_READY);
