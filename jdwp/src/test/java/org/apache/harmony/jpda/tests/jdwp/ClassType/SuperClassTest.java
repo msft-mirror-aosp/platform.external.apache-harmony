@@ -31,6 +31,7 @@ import org.apache.harmony.jpda.tests.framework.jdwp.JDWPCommands;
 import org.apache.harmony.jpda.tests.framework.jdwp.JDWPConstants;
 import org.apache.harmony.jpda.tests.framework.jdwp.ReplyPacket;
 import org.apache.harmony.jpda.tests.share.JPDADebuggeeSynchronizer;
+import org.apache.harmony.jpda.tests.share.SyncDebuggee;
 
 
 
@@ -116,7 +117,7 @@ public class SuperClassTest extends JDWPClassTypeTestCase {
 
             ReplyPacket reply = jdwpGetSuperClassReply(classID, JDWPConstants.Error.NONE);
             // complare returned signature with superclass signature
-            asserSuperClassReplyIsValid(reply, "Lorg/apache/harmony/jpda/tests/share/SyncDebuggee;");
+            asserSuperClassReplyIsValid(reply, getClassSignature(SyncDebuggee.class));
         }
 
         // check that there is no superclass for java.lang.Object
