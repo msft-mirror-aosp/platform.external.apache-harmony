@@ -26,6 +26,8 @@ java_test {
             exclude_srcs: ["src/test/java/org/apache/harmony/jpda/tests/jdwp/DDM/**/*.java"],
         },
     },
+
+    jarjar_rules: "jarjar-rules.txt",
 }
 
 java_library_host {

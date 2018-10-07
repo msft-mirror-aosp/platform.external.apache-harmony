@@ -42,14 +42,13 @@ public class SourceDebugExtensionTest extends JDWPSyncTestCase {
     static final int testStatusPassed = 0;
     static final int testStatusFailed = -1;
     static final String thisCommandName = "ReferenceType.SourceDebugExtension command";
-    static final String debuggeeSignature =
-            "Lorg/apache/harmony/jpda/tests/jdwp/ReferenceType/SourceDebugExtensionDebuggee;";
+    static final String debuggeeSignature = getClassSignature(SourceDebugExtensionDebuggee.class);
     static final String expectedSourceDebugExtension = "SMAP\nhelloworld_jsp.java\nJSP\n*S JSP\n" +
             "*F\n+ 0 helloworld.jsp\nhelloworld.jsp\n*L\n1,5:53\n6:58,3\n7,4:61\n*E\n";
 
     @Override
     protected String getDebuggeeClassName() {
-        return "org.apache.harmony.jpda.tests.jdwp.ReferenceType.SourceDebugExtensionDebuggee";
+        return SourceDebugExtensionDebuggee.class.getName();
     }
 
 
