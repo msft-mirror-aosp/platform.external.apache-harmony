@@ -12,19 +12,26 @@ java_test {
     hostdex: true,
     host_supported: true,
     srcs: ["src/test/java/**/*.java"],
-    no_framework_libs: true,
-    libs: ["junit"],
     static_libs: ["SourceDebugExtensionMockClass_gen"],
+
+    libs: ["junit"],
+
+    no_standard_libs: true,
+    system_modules: "core-all-system-modules",
+    target: {
+        // Only depend on core-all for the Android variant so we can avoid
+        // needing to create a core-all host variant.
+        android: {
+            libs: ["core-all"],
+        },
+        host: {
+            exclude_srcs: ["src/test/java/org/apache/harmony/jpda/tests/jdwp/DDM/**/*.java"],
+        },
+    },
 
     // b/73499927
     errorprone: {
         javacflags: ["-Xep:MissingOverride:OFF"],
-    },
-
-    target: {
-        host: {
-            exclude_srcs: ["src/test/java/org/apache/harmony/jpda/tests/jdwp/DDM/**/*.java"],
-        },
     },
 
     jarjar_rules: "jarjar-rules.txt",
