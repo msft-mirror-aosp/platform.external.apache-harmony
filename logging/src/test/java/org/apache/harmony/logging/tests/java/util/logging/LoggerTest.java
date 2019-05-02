@@ -43,18 +43,18 @@ import tests.util.CallVerificationStack;
  */
 public class LoggerTest extends TestCase {
 
-    private final static String VALID_RESOURCE_BUNDLE = "bundles/com/android/java/util/logging/res";
+    private final static String VALID_RESOURCE_BUNDLE = "bundles/java/util/logging/res";
 
     private final static String VALID_RESOURCE_BUNDLE2 =
-            "bundles/com/android/java/util/logging/res2";
+            "bundles/java/util/logging/res2";
 
     private final static String VALID_RESOURCE_BUNDLE3 =
-            "bundles/com/android/java/util/logging/res3";
+            "bundles/java/util/logging/res3";
 
     private final static String INVALID_RESOURCE_BUNDLE = "impossible_not_existing";
 
     private final static String LOGGING_CONFIG_RESOURCE =
-            "config/com/android/java/util/logging/logging.config";
+            "config/java/util/logging/logging.config";
 
     private final static String VALID_KEY = "LOGGERTEST";
 

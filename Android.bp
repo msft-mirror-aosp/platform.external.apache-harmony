@@ -35,7 +35,6 @@ java_test {
     ],
     system_modules: "core-all-system-modules",
     javacflags: ["-Xmaxwarns 9999999"],
-    jarjar_rules: "jarjar-rules.txt",
     // Pin java_version until jarjar is certified to support later versions. http://b/72703434
     java_version: "1.8",
 
