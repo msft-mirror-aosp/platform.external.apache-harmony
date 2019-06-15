@@ -16,7 +16,7 @@ java_test {
 
     libs: ["junit"],
 
-    no_standard_libs: true,
+    sdk_version: "none",
     system_modules: "core-all-system-modules",
     target: {
         // Only depend on core-all for the Android variant so we can avoid
