@@ -25,7 +25,7 @@ java_test {
         "sql/src/test/resources",
         "support/src/test/resources",
     ],
-    no_standard_libs: true,
+    sdk_version: "none",
     libs: [
         "core-all",
         "junit",
