@@ -5,6 +5,6 @@ ngeoffray@google.com
 shertz@google.com
 
 # For build / style / minor test fixes:
-include ../../libcore/OWNERS
+include platform/libcore:/OWNERS
 agampe@google.com
 sehr@google.com
