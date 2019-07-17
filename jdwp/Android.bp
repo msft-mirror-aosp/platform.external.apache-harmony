@@ -42,8 +42,3 @@ java_test {
 
     jarjar_rules: "jarjar-rules.txt",
 }
-
-java_library_host {
-    name: "apache-harmony-jdwp-tests-host",
-    static_libs: ["apache-harmony-jdwp-tests"],
-}
