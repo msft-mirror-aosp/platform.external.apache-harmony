@@ -22,11 +22,6 @@ java_test {
     sdk_version: "none",
     system_modules: "core-all-system-modules",
     target: {
-        // Only depend on core-all for the Android variant so we can avoid
-        // needing to create a core-all host variant.
-        android: {
-            libs: ["core-all"],
-        },
         host: {
             exclude_srcs: ["src/test/java/org/apache/harmony/jpda/tests/jdwp/DDM/**/*.java"],
         },
