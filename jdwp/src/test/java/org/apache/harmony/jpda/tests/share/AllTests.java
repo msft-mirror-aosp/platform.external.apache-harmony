@@ -36,34 +36,38 @@ public class AllTests {
   public static junit.framework.Test suite() {
     junit.framework.TestSuite suite = new junit.framework.TestSuite();
 
+    // All of these tests can only be run using the full JDWP implementation. They weren't really
+    // used by IDEs/aren't really applicable to android so were never supported by the
+    // -XjdwpProvider:internal JDWP implementation. The new agent based implementation supports them
+    // though.
+    JPDATestOptions to = new JPDATestOptions();
+    if (to.getSuiteType().equals("full") || to.getSuiteType().equals("libjdwp")) {
+      // I haven't yet found an IDE that will use these, but we might want to implement them anyway.
+      suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.Events.MonitorContendedEnteredTest.class);
+      suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.Events.MonitorContendedEnterTest.class);
+      suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.Events.MonitorWaitedTest.class);
+      suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.Events.MonitorWaitTest.class);
+
+      // I don't know when these are ever used, but they're not obviously useless.
+      suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ReferenceType.NestedTypesTest.class);
+      suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.VirtualMachine.HoldEventsTest.class);
+      suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.VirtualMachine.ReleaseEventsTest.class);
+
+      // Internal JDWP implementation never supported this.
+      suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ThreadReference.StopTest.class);
+    }
+
     //
-    // "TODO".
+    // These tests are not worth fixing or fundamentally do not make sense on android.
     //
-
-    // I haven't yet found an IDE that will use these, but we might want to implement them anyway.
-    //suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.Events.MonitorContendedEnteredTest.class);
-    //suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.Events.MonitorContendedEnterTest.class);
-    //suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.Events.MonitorWaitedTest.class);
-    //suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.Events.MonitorWaitTest.class);
-
-    // I don't know when these are ever used, but they're not obviously useless.
-    //suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.DebuggerOnDemand.OnthrowDebuggerLaunchTest.class);
-    //suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ReferenceType.NestedTypesTest.class);
-    //suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.VirtualMachine.HoldEventsTest.class);
-    //suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.VirtualMachine.ReleaseEventsTest.class);
-
-    //
-    // "Will not fix".
-    //
-
-    // It's not obvious how to translate this into our world, or what debuggers would do with it.
-    //suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ReferenceType.ClassFileVersionTest.class);
-
-    // We don't implement Thread.stop at all, so it doesn't make sense for us to implement the JDWP.
-    //suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ThreadReference.StopTest.class);
-
-    // We don't implement class unloading.
-    //suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.Events.ClassUnloadTest.class);
+    if (to.getSuiteType().equals("full")) {
+      // It's not obvious how to translate this into our world, or what debuggers would do with it.
+      suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ReferenceType.ClassFileVersionTest.class);
+      // TODO The test suite itself seems to send incorrect commands when this is run.
+      suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.DebuggerOnDemand.OnthrowDebuggerLaunchTest.class);
+      // TODO We don't implement class unloading in the way the test expects.
+      suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.Events.ClassUnloadTest.class);
+    }
 
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ArrayReference.GetValuesTest.class);
     suite.addTestSuite(org.apache.harmony.jpda.tests.jdwp.ArrayReference.LengthTest.class);
