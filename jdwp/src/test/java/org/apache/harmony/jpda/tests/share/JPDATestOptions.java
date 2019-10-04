@@ -25,6 +25,7 @@
  */
 package org.apache.harmony.jpda.tests.share;
 
+import java.util.Arrays;
 import org.apache.harmony.jpda.tests.framework.TestOptions;
 
 /**
@@ -38,6 +39,17 @@ import org.apache.harmony.jpda.tests.framework.TestOptions;
  *  
  */
 public class JPDATestOptions extends TestOptions {
+
+    /**
+     * Returns what test methods have been marked as bad and to be skipped.
+     *
+     * @return comma-split option "jpda.settings.badTestCases" or [] by default
+     */
+    public String[] getBadTestCases() {
+        return Arrays.stream(System.getProperty("jpda.settings.badTestCases", "").split(","))
+                     .filter((v) -> !v.equals(""))
+                     .toArray((i) -> new String[i]);
+    }
 
     /**
      * Returns what test suite we should use if running AllTests. May be "internal" (for the test
