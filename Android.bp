@@ -47,14 +47,13 @@ java_test {
         "support/src/test/resources",
     ],
     sdk_version: "none",
+    system_modules: "core-all-system-modules",
     libs: [
-        "core-all",
         "junit",
     ],
     static_libs: [
         "core-tests-support",
     ],
-    system_modules: "core-all-system-modules",
     javacflags: ["-Xmaxwarns 9999999"],
     // Pin java_version until jarjar is certified to support later versions. http://b/72703434
     java_version: "1.8",
