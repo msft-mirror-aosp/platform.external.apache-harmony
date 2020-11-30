@@ -19,6 +19,7 @@ package {
 java_test {
     name: "apache-harmony-tests",
     visibility: [
+        "//art/build/sdk",
         "//cts/tests/libcore/luni",
     ],
     hostdex: true,
