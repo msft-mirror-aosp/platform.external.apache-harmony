@@ -75,9 +75,6 @@ java_test {
 
     // b/73499927
     errorprone: {
-        javacflags: [
-            "-Xep:MissingOverride:OFF",
-            "-Xep:DoNotCall:OFF",
-        ],
+        javacflags: ["-Xep:MissingOverride:OFF"],
     },
 }
