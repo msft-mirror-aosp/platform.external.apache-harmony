@@ -131,7 +131,7 @@ public class GetValues002Test extends JDWPSyncTestCase {
         assertEquals("Invalid number of values,", checkedFieldsNumber - 1, returnedValuesNumber);
 
         byte expectedFieldTags[] = {
-                0, // placeholder
+                0, // dummy
                 JDWPConstants.Tag.LONG_TAG,
                 JDWPConstants.Tag.INT_TAG,
                 JDWPConstants.Tag.STRING_TAG,

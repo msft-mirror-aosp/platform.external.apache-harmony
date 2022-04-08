@@ -33,9 +33,9 @@ import java.util.Enumeration;
 /**
  * Empty implementation used to enable unit tests to run.
  */
-public class Support_FakePKCS12Keystore extends KeyStoreSpi {
+public class Support_DummyPKCS12Keystore extends KeyStoreSpi {
 
-    public Support_FakePKCS12Keystore() {
+    public Support_DummyPKCS12Keystore() {
         super();
     }
 
