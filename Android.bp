@@ -35,6 +35,7 @@ java_test {
     visibility: [
         "//art/build/sdk",
         "//cts/tests/libcore/luni",
+        "//libcore",
     ],
     hostdex: true,
     srcs: [
