@@ -50,12 +50,26 @@ public class MonitorContendedEnterAndEnteredDebuggee extends SyncDebuggee {
                 Thread.yield();
                 logWriter.println("main thread: Waiting for second thread to attempt to lock a monitor");
             }
-            
+        
             // We think the monitor is contended.
             synchronizer.sendMessage(JPDADebuggeeSynchronizer.SGNL_READY);
             // Make sure we're good to finish.
             synchronizer.receiveMessage(JPDADebuggeeSynchronizer.SGNL_CONTINUE);
             logWriter.println("--> main thread: finish test");
+        }
+
+        // Wait for the blocked thread to join. This makes sure we entered the synchronized section
+        // in the blocked thread and hence the MonitorContentedEntered message should be sent. If we
+        // don't wait here, there is a possibility we exit the process before the blocked thread
+        // gets a chance to enter the monitor lock.
+        boolean done = false;
+        while (!done) {
+          try {
+            thread.join();
+            done = true;
+          } catch(InterruptedException e) {
+            System.out.println("Thread interrupted when joining, giving another chance");
+          }
         }
     }
 
