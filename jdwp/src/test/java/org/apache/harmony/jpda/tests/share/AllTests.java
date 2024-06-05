@@ -129,6 +129,27 @@ public class AllTests {
     // though.
     Set<String> bad_test_cases = new HashSet<>();
     bad_test_cases.addAll(Arrays.asList(TEST_OPTIONS.getBadTestCases()));
+
+    // TODO(b/227193963): ART and RI don't report errors for certain JNI checks like incorrect
+    // method IDs on invoke method or incorrect field ids on GetField. Though this is required by
+    // the spec ART has never supported this. RI doesn't support it either. So disable the following
+    // tests.
+    bad_test_cases.add(
+        "org.apache.harmony.jpda.tests.jdwp.ClassType_InvokeMethodTest#testInvokeMethod002");
+    bad_test_cases.add(
+        "org.apache.harmony.jpda.tests.jdwp.ClassType_InvokeMethodTest#testInvokeMethod003");
+    bad_test_cases.add(
+        "org.apache.harmony.jpda.tests.jdwp.ReferenceType_GetValues002Test#testGetValues002");
+    bad_test_cases.add(
+        "org.apache.harmony.jpda.tests.jdwp.ReferenceType_GetValues004Test#testGetValues004");
+    bad_test_cases.add(
+        "org.apache.harmony.jpda.tests.jdwp.StringReference_ValueTest#"
+        + "testStringReferenceValueTest001_NullString");
+    bad_test_cases.add(
+        "org.apache.harmony.jpda.tests.jdwp.ClassType_InvokeMethod002Test#"
+        + "testInvokeMethod_wrong_argument_types");
+
+
     FilterSuite suite = (k) -> {
       try {
         baseSuite.addTest(
