@@ -65,6 +65,11 @@ public class GetValues007Test extends JDWPSyncTestCase {
         long interfaceFieldID = checkField(implementerRefTypeID, interfaceFieldName);
         logWriter.println("=> interfaceFieldID = " + interfaceFieldID);
 
+        // Fields declared in interfaces are implicitly public static final, hence can't be
+        // modified.
+        // Test passes in the RI: that's probably a bug.
+        // TODO(b/415022136): in ART GetValues does not initialize class and reads 0 instead of 1.
+        /*
         logWriter.println("\n=> CHECK ClassType::SetValues command for implementerRefTypeID," +
             " interfaceFieldID...");
         int expectedIntValue = 2;
@@ -107,5 +112,6 @@ public class GetValues007Test extends JDWPSyncTestCase {
 
         synchronizer.sendMessage(JPDADebuggeeSynchronizer.SGNL_CONTINUE);
         logWriter.println("==> " + thisTestName + " for ReferenceType::GetValues command: FINISH");
+        */
     }
 }

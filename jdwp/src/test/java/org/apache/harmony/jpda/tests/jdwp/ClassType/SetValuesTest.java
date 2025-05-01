@@ -116,7 +116,13 @@ public class SetValuesTest extends JDWPClassTypeTestCase {
     }
 
     private void testField(long classID, Field fieldInfo, Value value) {
-
+        // Static final fields value can't be modified: that's mentioned both in the language [1]
+        // and JDWP protocol [2] specs.
+        // [1] https://docs.oracle.com/javase/specs/jls/se24/html/jls-17.html#jls-17.5.4
+        // [2] https://docs.oracle.com/javase/1.5.0/docs/guide/jpda/jdwp/jdwp-protocol.html#JDWP_ClassType_SetValues
+        if (fieldInfo.isStatic() && fieldInfo.isFinal()) {
+            return;
+        }
         logWriter.println("\n==> testField: ");
         logWriter.println("    classID = " + classID);
         logWriter.println("    fieldInfo = " + fieldInfo);
